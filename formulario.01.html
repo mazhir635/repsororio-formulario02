@@ -5,7 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>formulario</title>
 </head>
+<style>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+    }
+
+    form {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        display: block;
+        margin-top: 1rem;
+        font-weight: bold;
+        color: #444;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    select {
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 0.3rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+        margin-right: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    select {
+        background-color: #fff;
+    }
+
+    input[type="submit"],
+    input[type="reset"] {
+        margin-top: 1.5rem;
+        padding: 0.7rem 1.2rem;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-right: 1rem;
+        transition: background-color 0.3s;
+
+</style>
 <body>
-    
+    <h1>formulario</h1>
+    <form action=""method="get">
+        <label for="">Escriba nombre y apellido</label>
+        <input type="text" name="nombre_compleo" id="nombre_compleo" >
+        <br>
+        <label for="contrasena">escriba su contraseña</label>
+        <input type="password" name="contrasena" id="contraseña">
+        <br>
+        <label for="genero">Indica el genero </label>
+        <input type="radio" name="genero" id="genero" value="mujer"> mujer
+        <input type="radio" name="genero" id="genero" value="hombre"> hombre
+        <input type="radio" name="genero" id="genero" value="otro"> otro
+        <br>
+        <label for="idioma">selecione los idiomas</label>
+        <input type="checkbox" name="castellano" id="castellano"> castellano
+        <input type="checkbox" name="arabe" id="arabe"> arabe
+        <input type="checkbox" name="ingles" id="ingles"> ingles
+        <input type="checkbox" name="chino" id="chino"> chino
+        <input type="checkbox" name="frances" id="frances"> frances
+        <br>
+        <label for="estudios">--selecione su nivel de estudios</label>
+        <select name="estudios" id="estudios">
+            <option value="defecto">selecione una option</option>
+            <option value="eso">eso</option>
+            <option value="bachillerato">bachillerato</option>
+            <option value="FP">FP</option>
+            <option value="Grado">Grado</option>
+        </select>
+        <br>
+        <input type="submit" value="enviar informacion">
+        <input type="reset" value="limpiar informacion">
+    </form>
+
+
 </body>
 </html>
