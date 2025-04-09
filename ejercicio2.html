@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejercicio2</title>
+</head>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #bdc007;
+        color: #000000;
+        display: flex;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    form {
+        background-color: rgb(247, 247, 247);
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 1rem;
+        color: #000000;
+    }
+
+    input[type="text"],input[type="email"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 0.6rem;
+        margin-top: 0.4rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+        margin-right: 0.5rem;
+        margin-top: 0.7rem;
+    }
+
+    p {
+        margin-top: 1.5rem;
+        font-weight: bold;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+        margin-top: 0.5rem;
+    }
+
+    select {
+        background-color: #fff;
+    }
+
+    /* Botones extra por si quieres agregar */
+    .form-buttons {
+        margin-top: 1.5rem;
+    }
+
+    .form-buttons input {
+        padding: 0.6rem 1.2rem;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-right: 1rem;
+        transition: background-color 0.3s;
+    }
+
+    .form-buttons input[type="submit"] {
+        background-color: #4CAF50;
+        color: blue
+    }
+
+    .form-buttons input[type="reset"] {
+        background-color: #f44336;
+        color: white;
+    }
+    input[type="submit"]{
+        width: 100%;
+        background-color: blue;
+        color: white;
+    }
+ 
+
+</style>
+<body>
+    <form action="">
+    <label for="nombre">Escribe tu nombre:</label>
+    <input type="text" name="nombre" placeholder="Mazhir" id="usuario">
+    <br>
+    <label for="apellido">Escribe tu apellido:</label>
+    <input type="text" name="apellido" placeholder="Azhir" id="apellido">
+    <br>
+    <label for="gmail">Escribe tu gmail:</label>
+    <input type="email" name="email" placeholder="mohamst@gmail.com" required id="gmail">
+    <br>
+    <label for="puntuacion">¿que puntuacion le das a la publicacion?</label>
+    <br>
+    <input type="radio" name="puntuacion" id="c"> 1
+    <input type="radio" name="puntuacion" id="c"> 2
+    <input type="radio" name="puntuacion" id="c"> 3
+    <input type="radio" name="puntuacion" id="c"> 4
+    <input type="radio" name="puntuacion" id="c"> 5
+    <br> 
+    <label for="estidios">¿Que asignaturas has estudiado?</label>
+    <br>
+    <input type="checkbox" name="html" id="html"> html
+    <input type="checkbox" name="css" id="css"> css
+    <input type="checkbox" name="javascript" id="javascript"> javascript
+    <br>
+    <p>Seleciona tu alinacion ideal</p>
+    <select name="alineacion" id="alineacion">
+        <option value="defecto">selecione una alineacion</option>
+        <option value="CR7">CR7</option>
+        <option value="Mesi">Mesi</option>
+        <option value="Vini">Vini</option>
+        <option value="Saka">Saka</option>
+        <option value="Musiala">Musiala</option>
+    </select>
+    <br>
+    <label for="mejoras">¿Que mejorarias de este curso? </label>
+    <br>
+    <textarea name="mejoras" id=""></textarea>
+    <br>
+    <input type="submit" value="enviar informacion">
+    </form>
+
+</body>
+</html>
