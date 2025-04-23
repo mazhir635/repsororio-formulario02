@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>formulario</title>
+</head>
+<style>
+    body {
+        background-color: #f2f4f8;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    form {
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-top: 15px;
+        font-weight: 600;
+        color: #555;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+    }
+
+    input[type="submit"] {
+        margin-top: 20px;
+        background-color: #4f46e5;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #3730a3;
+    }
+</style>
+
+<body>
+    <form>
+        <label>Nombre: <input type="text" name="nombre"></label>
+        <br>
+        <br>
+        <label>Correo electrónico: <input type="email" name="correo"></label>
+        <br>
+        <br>
+        <label>URL: <input type="url" name="url" placeholder="Escribe la URL de tu página"></label>
+        <br>
+        <br>
+        <label>Fecha: <input type="date" name="fecha"></label>
+        <br>
+        <br>
+        <label>Tiempo: <input type="time" name="tiempo"></label>
+        <br>
+        <br>
+        <label>Fecha y hora: <input type="datetime-local" name="fechaHora"></label>
+        <br>
+        <br>
+        <label>Mes: <input type="month" name="mes"></label>
+        <br>
+        <br>
+        <label>Semana: <input type="week" name="semana"></label>
+        <br>
+        <br>
+        <label>Número (min -10, max 10): <input type="number" name="numero" min="-10" max="10" value="0"></label>
+        <br>
+        <br>
+        <label>Teléfono: <input type="tel" name="telefono" placeholder="Escriba el telefono movil"></label>
+        <br>
+        <br>
+        <label>Término de búsqueda: <input type="search" name="busqueda"></label>
+        <br>
+        <br>
+        <label>Color favorito: <input type="color" name="color"></label>
+        <br>
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>

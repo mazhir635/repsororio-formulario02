@@ -1,22 +1,213 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>formulario2</title>
+  <meta charset="UTF-8">
+  <title>Mi Escritorio de Escritura</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    input, textarea, button, select {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background-color: #4338ca;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    ul {
+      padding: 0;
+      list-style: none;
+      margin-top: 10px;
+    }
+
+    li {
+      background-color: #eef;
+      padding: 8px;
+      margin-bottom: 5px;
+      border-radius: 6px;
+    }
+  </style>
 </head>
 <body>
-    <h1>formulario de login</h1>
-    <form action="formulario.01.html">
-    <label for="usuario">usuario:</label>
-    <input type="text" name="usuario" id="usuario">
-     <br>
-    <label for="contrasena">password:</label>
-     <input type="password" name="contrasena">
-     <br>
-    <input type="submit" value="login">
+  <div class="container" id="auth">
+    <h1>📚 Mi Escritorio de Escritura</h1>
+    <input type="text" id="username" placeholder="Usuario">
+    <input type="password" id="password" placeholder="Contraseña">
+    <button onclick="login()">Iniciar Sesión</button>
+    <button onclick="register()">Registrarse</button>
+    <p id="authMessage" style="color: red; text-align: center;"></p>
+  </div>
 
+  <div class="container hidden" id="mainApp">
+    <h2>Bienvenido, <span id="userDisplay"></span></h2>
+    <input type="text" id="folderName" placeholder="Nombre de carpeta">
+    <button onclick="createFolder()">Crear Carpeta</button>
+    <select id="folderSelect" onchange="loadNotes()"></select>
+    <textarea id="noteText" rows="5" placeholder="Escribe tu nota aquí..."></textarea>
+    <button onclick="saveNote()">Guardar Nota</button>
+    <ul id="noteList"></ul>
+    <button onclick="logout()" style="background: #e11d48;">Cerrar sesión</button>
+  </div>
 
-    </form>
+  <script>
+    const auth = document.getElementById("auth");
+    const mainApp = document.getElementById("mainApp");
+    const userDisplay = document.getElementById("userDisplay");
+    let currentUser = null;
+
+    function getUsers() {
+      return JSON.parse(localStorage.getItem("users")) || {};
+    }
+
+    function register() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const users = getUsers();
+      if (!username || !password) {
+        showMessage("Por favor completa los campos.");
+        return;
+      }
+      if (users[username]) {
+        showMessage("Ese usuario ya existe.");
+        return;
+      }
+      users[username] = { password, folders: {} };
+      localStorage.setItem("users", JSON.stringify(users));
+      showMessage("Registro exitoso. Ahora inicia sesión.", "green");
+    }
+
+    function login() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const users = getUsers();
+      if (users[username] && users[username].password === password) {
+        currentUser = username;
+        startApp();
+      } else {
+        showMessage("Credenciales incorrectas.");
+      }
+    }
+
+    function logout() {
+      currentUser = null;
+      auth.classList.remove("hidden");
+      mainApp.classList.add("hidden");
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+      showMessage("");
+    }
+
+    function showMessage(msg, color = "red") {
+      const msgEl = document.getElementById("authMessage");
+      msgEl.textContent = msg;
+      msgEl.style.color = color;
+    }
+
+    function startApp() {
+      auth.classList.add("hidden");
+      mainApp.classList.remove("hidden");
+      userDisplay.textContent = currentUser;
+      updateFolderDropdown();
+    }
+
+    function getUserData() {
+      const users = getUsers();
+      return users[currentUser];
+    }
+
+    function saveUserData(data) {
+      const users = getUsers();
+      users[currentUser] = data;
+      localStorage.setItem("users", JSON.stringify(users));
+    }
+
+    function createFolder() {
+      const name = document.getElementById("folderName").value.trim();
+      if (!name) return;
+      const userData = getUserData();
+      if (!userData.folders[name]) {
+        userData.folders[name] = [];
+        saveUserData(userData);
+        updateFolderDropdown();
+        document.getElementById("folderName").value = "";
+      }
+    }
+
+    function updateFolderDropdown() {
+      const folderSelect = document.getElementById("folderSelect");
+      folderSelect.innerHTML = "<option disabled selected>Selecciona una carpeta</option>";
+      const userData = getUserData();
+      for (let folder in userData.folders) {
+        const option = document.createElement("option");
+        option.value = folder;
+        option.textContent = folder;
+        folderSelect.appendChild(option);
+      }
+    }
+
+    function saveNote() {
+      const folder = document.getElementById("folderSelect").value;
+      const text = document.getElementById("noteText").value.trim();
+      if (!folder || !text) return alert("Elige carpeta y escribe algo.");
+      const userData = getUserData();
+      userData.folders[folder].push(text);
+      saveUserData(userData);
+      document.getElementById("noteText").value = "";
+      loadNotes();
+    }
+
+    function loadNotes() {
+      const folder = document.getElementById("folderSelect").value;
+      const noteList = document.getElementById("noteList");
+      const userData = getUserData();
+      noteList.innerHTML = "";
+      if (userData.folders[folder]) {
+        userData.folders[folder].forEach((note, i) => {
+          const li = document.createElement("li");
+          li.textContent = `Nota ${i + 1}: ${note.substring(0, 30)}...`;
+          noteList.appendChild(li);
+        });
+      }
+    }
+  </script>
 </body>
 </html>
